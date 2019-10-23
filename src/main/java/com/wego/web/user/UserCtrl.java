@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wego.web.cmm.IConsumer;
+import com.wego.web.cmm.IFunction;
 import com.wego.web.utl.Printer;
 
 import lombok.extern.log4j.Log4j;
@@ -24,28 +26,24 @@ public class UserCtrl {
 	  @Autowired Map<String, Object>map;
 	  @Autowired User user;
 	  @Autowired Printer printer;
+	  @Autowired UserMapper userMapper;
+	  
 	  
 	    @PostMapping("/")    //
-	    public  Map<?,?> join(@RequestBody User param) {   
+	    public  String join(@RequestBody User param) {   
 	    	logger.info("aaaa");
-	    	printer.accept("람다 프린트가 출력한 값"+ param.getUid()+","+param.getPwd());
-	        HashMap<String, Object> map = new HashMap<>();
-	        logger.info("AJAX가 보낸 아이디와 비번 {} ", param.getUid() + ", " + param.getPwd());
-	        map.put("uid", param.getUid());
-	        map.put("pwd", param.getPwd());
-	        logger.info("map에 담긴 아이디와 비번 {} ", map.get("uid") + ", " + map.get("pwd"));
-	        return map;
+	    	
+	    	 IConsumer<User>  c = o ->userMapper.insertUser(param);
+	        c.accept(param);
+	        
+	        return "SUCCESS";
 	    }
 	    
 	    @PostMapping("/login")
 	    public  User login(@RequestBody User param){
-	    	System.out.println("로그인 컨트롤러");
-	    	logger.info("login 성공 서블user Controller");
-	    user.setUid(param.getUid());
-	    user.setPwd(param.getPwd());
-	      logger.info("AJAX가 보낸 로그인 아이디와 비번{}",param.toString());
-	      
-	    	return param;
+	    	IFunction<User, User> f =  o -> userMapper.selectByIdPw(param);
+				
+	    	return  f.apply(param);
 	    }
 
 }
