@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.wego.web.cmm.IConsumer;
 import com.wego.web.cmm.IFunction;
+import com.wego.web.cmm.IPredicate;
 import com.wego.web.utl.Printer;
 import lombok.extern.log4j.Log4j;
-
+import java.util.Map;
 @RestController
 @RequestMapping("/users")
 @Log4j
@@ -25,16 +26,27 @@ public class UserCtrl {
 	  @Autowired User user;
 	  @Autowired Printer printer;
 	  @Autowired UserMapper userMapper;
+	  @Autowired Map<String, Object> map;
 	  
+	  @GetMapping("/{uid}/exist")
+	  public Map<?,?> existId(@PathVariable String uid){
+		  logger.info("exist"+uid);
+		  IFunction<String, Integer> p = o -> userMapper.existId(uid);
+		  map.clear();
+		  map.put("msg",(p.apply(uid) == 0) ? "SUCCESS" :"FAIL");
+	       return map;
+	  }
 	  
 	    @PostMapping("/")    //
-	    public  String join(@RequestBody User param) {   
-	    	logger.info("aaaa");
+	    public  Map<?,?> join(@RequestBody User param) {   
+	    	printer.accept("join들어옴"+param.toString());
 	    	
-	    	 IConsumer<User>  c = t ->userMapper.insertUser(param);
+	    	 IConsumer<User>  c = o ->userMapper.insertUser(param);
 	        c.accept(param);
-	        
-	        return "SUCCESS";
+	        map.clear();
+	        map.put("msg","SUCCESS");
+	       
+	        return map;
 	    }
 	    
 	    @PostMapping("/{uid}")

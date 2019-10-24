@@ -9,7 +9,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.wego.web.cmm"})
+@ComponentScan(basePackages = {"com.wego.web"})
 public class ServletConfig implements WebMvcConfigurer {
 	
 	@Override
