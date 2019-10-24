@@ -103,15 +103,14 @@ auth =(()=>{
 		
 	}
 	let mypage =d=>{
-		 init();
 		 $.getScript(brd_vuejs).done(()=>{
-			 setContentView()
 				$('head')
 				.html(brd_vue.brd_head())
 				$('body')
 				.html(brd_vue.brd_body())
-			 
+				.addClass('bg-light')
 		 })
+		 
 	}
 	let existId =x=>{
 		let data = { uid : $('#userid').val()}

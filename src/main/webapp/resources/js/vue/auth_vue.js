@@ -320,6 +320,6 @@ auth_vue = {
 			'  </form>'
 		
 		},
-		mypagehead: d =>{}
+	
 		
 };

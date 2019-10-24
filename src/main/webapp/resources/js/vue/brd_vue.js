@@ -7,13 +7,13 @@ brd_vue = {
 			'    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">'+
 			'    <meta name="description" content="">'+
 			'    <meta name="author" content="">'+
-			'    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">'+
+			'    <link rel="icon" href="https://getbootstrap.com/docs/4.0/assets/img/favicons/favicon.ico">'+
 			+ '   <title>Offcanvas template for Bootstrap</title>'+
 			+ '   <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/offcanvas/">'+
 			+ '   <!-- Bootstrap core CSS -->'
-			+	'    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">'+
+			+	'    <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">'+
 			+ '   <!-- Custom styles for this template -->'+
-			'    <link href="offcanvas.css" rel="stylesheet">'+
+			'    <link href="https://getbootstrap.com/docs/4.0/examples/offcanvas/offcanvas.css" rel="stylesheet">'+
 			'  </head>'
 		},
 		brd_body:()=>{
@@ -140,8 +140,15 @@ brd_vue = {
 			'        </small>'+
 			'      </div>'+
 			'    </main>'+
-			'<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="2" style="font-weight:bold;font-size:2pt;font-family:Arial, Helvetica, Open Sans, sans-serif">32x32</text></svg>'+
+			'<svg xmlns="https://code.jquery.com/jquery-3.2.1.slim.min.js"><defs><style type="text/css"></style></defs><text x="0" y="2" style="font-weight:bold;font-size:2pt;font-family:Arial, Helvetica, Open Sans, sans-serif">32x32</text></svg>'+
 			'</body>'
+			'    <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"anonymous"></script>'+
+			'    <script>window.jQuery || document.write(<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>)</script>'+
+			'    <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>'+
+			'    <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>'+
+			'    <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/holder.min.js"></script>'+
+			'    <script src="https://getbootstrap.com/docs/4.0/examples/offcanvas/offcanvas.js"></script>'+
+			'<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="2" style="font-weight:bold;font-size:2pt;font-family:Arial, Helvetica, Open Sans, sans-serif">32x32</text></svg></body>'
 		}
 		
 }
