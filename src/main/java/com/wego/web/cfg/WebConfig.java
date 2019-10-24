@@ -1,4 +1,4 @@
-package com.wego.web.config;
+package com.wego.web.cfg;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 

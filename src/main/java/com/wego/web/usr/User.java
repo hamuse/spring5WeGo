@@ -1,4 +1,4 @@
-package com.wego.web.user;
+package com.wego.web.usr;
 
 
 import org.springframework.stereotype.Component;

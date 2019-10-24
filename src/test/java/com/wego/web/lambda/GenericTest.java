@@ -1,6 +1,6 @@
 package com.wego.web.lambda;
 
-import com.wego.web.user.User;
+import com.wego.web.usr.User;
 
 public class GenericTest {
 	static class Box<T>{
