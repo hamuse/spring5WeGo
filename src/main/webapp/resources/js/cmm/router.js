@@ -11,3 +11,13 @@ function Session(x){
 		img: ()=>{return sessionStorage.getItem('img');}
 	}
 }
+//function User(s){
+//	sessionStorage.setItem('uname', s.uname);
+//	sessionStorage.setItem('uid', s.uid);
+//	sessionStorage.setItem('pwd', s.pwd);
+//	return{
+//		uname : () =>{return sessionStorage.getItem('uname');},
+//		uid : () =>{return sessionStorage.getItem('uid');},
+//		pwd : () =>{return sessionStorage.getItem('pwd');}
+//	}
+//}

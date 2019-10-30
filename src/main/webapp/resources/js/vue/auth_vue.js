@@ -117,7 +117,7 @@ auth_vue = {
 			'      </form>'+
 			'    </div>'+
 			'    <div class="col-md-8 order-md-1">'+
-			'      <h4 class="mb-3">Billing address</h4>'+
+			'      <h4 class="mb-3">Wego회원가입</h4>'+
 			'      <form class="needs-validation" novalidate="">'+
 			'        <div class="row">'+
 			'          <div class="col-md-6 mb-3">'+
@@ -128,13 +128,19 @@ auth_vue = {
 			'            </div>'+
 			'          </div>'+
 			'          <div class="col-md-6 mb-3">'+
-			'            <label for="password">PASSWORD</label>'+
-			'            <input type="text" class="form-control" id="password" placeholder="" value="" required="">'+
+			'            <label for="password">Id중복체크</label>'+
+			'            <input type="text" class="form-control" id="dupl_check" placeholder="" value="" required="">'+
 			'            <div class="invalid-feedback">'+
 			'              Valid last name is required.'+
 			'            </div>'+
 			'          </div>'+
 			'        </div>'+
+			'		<div class="mb-3">'+
+			'          <label for="address">비밀번호</label>'+
+			'          <input type="text" class="form-control" id="password" placeholder="1234 Main St" required="">'+
+			'          <div class="invalid-feedback">'+
+			'            Please enter your shipping address.'+
+			'          </div>'+
 			'		<div class="mb-3">'+
 			'          <label for="username">Username</label>'+
 			'          <div class="input-group">'+
@@ -154,12 +160,6 @@ auth_vue = {
 			'            Please enter a valid email address for shipping updates.'+
 			'          </div>'+
 			'        </div>'+
-			'		<div class="mb-3">'+
-			'          <label for="address">Address</label>'+
-			'          <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="">'+
-			'          <div class="invalid-feedback">'+
-			'            Please enter your shipping address.'+
-			'          </div>'+
 			'        </div>'+
 			'		<div class="mb-3">'+
 			'          <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>'+
@@ -273,7 +273,7 @@ auth_vue = {
 			'  <title>Document</title>'+
 			'<head>'+
 			'  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">'+
-			'  <link href="/docs/4.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">'+
+			'  <link href="https://getbootstrap.com/docs/4.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">'+
 			'   <meta charset="utf-8">'+
 			'    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">'+
 			'    <meta name="description" content="">'+
@@ -313,6 +313,9 @@ auth_vue = {
 			'    <div class="checkbox mb-3">'+
 			'      <label>'+
 			'        <a id="a_go_join" href="#">Go Join</a>'+
+			'      </label>'+
+			'      <label>'+
+			'        <a id="a_go_admin" href="#">ADMIN</a>'+
 			'      </label>'+
 			'    </div>'+
 			'    <div id="btn_login"></div>'+

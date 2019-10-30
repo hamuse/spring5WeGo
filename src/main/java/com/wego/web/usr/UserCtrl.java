@@ -30,7 +30,7 @@ public class UserCtrl {
 	  
 	  @GetMapping("/{uid}/exist")
 	  public Map<?,?> existId(@PathVariable String uid){
-		  logger.info("exist"+uid);
+		  logger.info("exist : "+uid);
 		  IFunction<String, Integer> p = o -> userMapper.existId(uid);
 		  map.clear();
 		  map.put("msg",(p.apply(uid) == 0) ? "SUCCESS" :"FAIL");

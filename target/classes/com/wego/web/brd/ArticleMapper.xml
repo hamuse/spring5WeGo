@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wego.web.brd.ArticleMapper">
+		<insert id="insertArticle" parameterType="Article">
+		 insert into article (uid, board_type, title, content) values (
+            #{uid},#{boardType},#{title},#{content}
+        )
+		</insert>
+	<select id="countArticle" resultType="string"> 
+      select count(*)
+      from ARTICLE
+      where board_type like '게시판'
+    </select>
+    <select id="selectAll" resultType="Article">
+    	select a.board_type as boardType, a.*
+    	from ARTICLE a
+    	where board_type like '게시판' 
+    </select>
+    <delete id ="deleteArticle" parameterType="string">
+    	delete from ARTICLE where artseq =#{artseq}
+    </delete>
+    <update id ="updateArticle" parameterType="Article">
+    update ARTICLE set title = #{title}, content=#{content} where uid like #{uid} 
+  	and artseq like #{artseq}
+  	and  board_type like '게시판' 
+    </update>
+</mapper>

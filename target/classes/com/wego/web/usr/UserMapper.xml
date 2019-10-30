@@ -16,10 +16,10 @@
         )
     </insert>
  
-    <insert id="existId" parameterType="string"> 
-        insert into user (uid, pwd, uname) values (
-            #{uid}
-        )
-    </insert>
+    <select id="existId" resultType="int"> 
+      select count(*)
+      from user
+      where uid like #{uid}
+    </select>
     
 </mapper>
