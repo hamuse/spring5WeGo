@@ -203,7 +203,6 @@ auth = (() => {
                     error: e => {
                         alert('ajax 실패')
                     }
-
                 })
             }*/
         	 admin.onCreate()

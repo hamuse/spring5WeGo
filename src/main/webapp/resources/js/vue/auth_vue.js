@@ -281,7 +281,7 @@ auth_vue = {
             '    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">' +
             '    <meta name="generator" content="Jekyll v3.8.5">' +
             '    <title>Signin Template · Bootstrap</title>' +
-    /*        '    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/sign-in/">' +
+            '    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/sign-in/">' +
             '    <!-- Bootstrap core CSS -->' +
             '    <style>' +
             '      .bd-placeholder-img {' +
@@ -300,7 +300,7 @@ auth_vue = {
             '    </style>' +
             '    <!-- Custom styles for this template -->' +
             '    <link href="' + x.css + '/signin.css" rel="stylesheet">' +
-            '    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">'+*/
+            '    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">'+
             '</head>'
     },
     login_body: x => {
