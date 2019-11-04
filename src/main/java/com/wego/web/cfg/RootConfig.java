@@ -9,6 +9,9 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -16,6 +19,8 @@ import com.zaxxer.hikari.HikariDataSource;
 @Configuration
 @MapperScan(basePackages = {"com.wego.web"})
 @ComponentScan(basePackages = {"com.wego.web"})
+//@EnableAspectJAutoProxy
+//@EnableTransactionManagement
 public class RootConfig {
 		@Bean
 		public DataSource dataSource() {
@@ -29,7 +34,10 @@ public class RootConfig {
 			
 			return dataSource;
 		}
-		
+		@Bean
+		public DataSourceTransactionManager txManager() {
+			return new DataSourceTransactionManager(dataSource());
+		}
 	
 	
 }

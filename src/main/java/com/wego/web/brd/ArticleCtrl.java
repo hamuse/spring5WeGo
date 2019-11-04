@@ -1,5 +1,6 @@
 package com.wego.web.brd;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Map;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.log4j.Log4j;
 
+import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 import com.wego.web.cmm.IConsumer;
 import com.wego.web.cmm.IFunction;
 import com.wego.web.cmm.ISupplier;
@@ -47,14 +49,26 @@ public class ArticleCtrl {
 			map.put("count", t.get());
 			return map;
 		}
-		@GetMapping("/")
+	/*	@GetMapping("/")
 		public List<Article> list(){
 			list.clear();
 			ISupplier<List<Article>> p = ()->articleMapper.selectAll();
 			printer.accept("전체 글목록\n"+p.get());
 			
 			return p.get();
+		}*/
+		@GetMapping("/page/{pageNo}")
+		public Map<?,?> list(@PathVariable String pageNo){
+			list.clear();
+			ISupplier<List<Article>> p = ()->articleMapper.selectpagination();
+					printer.accept("해당 페이지 글 목록\n"+p.get());
+			map.clear();
+			map.put("articles", p.get());
+			map.put("pages",Arrays.asList(1,2,3,4,5));
+			
+			return map;
 		}
+
 		@GetMapping("/count")
 		public Map<?,?> count(){
 			logger.info("count : ");

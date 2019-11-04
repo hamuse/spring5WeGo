@@ -1,5 +1,6 @@
 package com.wego.web.admin;
 
+import java.util.HashMap;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +29,7 @@ public class AdminCtrl {
 	@Autowired Admin admin;
 	@Autowired Printer printer;
 	@Autowired AdminMapper adminMapper;
-	@Autowired Map<String, Object> map;
+//	@Autowired Map<String, Object> map;
 	
 	@PostMapping("/")
 	public void joinAdminEid (@RequestBody Admin param) {
@@ -37,6 +38,7 @@ public class AdminCtrl {
 	
 	@PostMapping("/{eid}/access")
 	public Map<?,?>  access(@PathVariable String eid,@RequestBody Admin param) {//로그인
+		HashMap<String,Object> map = new HashMap<>();
 		logger.info("admin ctrl access 들어옴:" +param.toString());
 		IFunction<Admin, Admin> f = t -> adminMapper.selectAdminbyidpw(param);
 		String yes = (f.apply(param) !=null) ? "SUCCESS" : "FAIL";

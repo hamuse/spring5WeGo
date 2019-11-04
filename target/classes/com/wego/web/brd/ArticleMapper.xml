@@ -26,4 +26,10 @@
   	and artseq like #{artseq}
   	and  board_type like '게시판' 
     </update>
+    <select id="selectpagination" resultType="Article">
+	 select a.board_type as boardType, a.* from (select *
+			from ARTICLE
+			ORDER BY artseq DESC) a  
+	Limit 0, 5
+   </select>
 </mapper>

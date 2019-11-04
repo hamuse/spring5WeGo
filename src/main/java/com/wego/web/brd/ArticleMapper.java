@@ -11,6 +11,5 @@ public interface ArticleMapper {
 	public List<Article> selectAll();
 	public void updateArticle(Article param);
 	public void deleteArticle(String artseq);
-	
-	
+    public List<Article> selectpagination();
 }

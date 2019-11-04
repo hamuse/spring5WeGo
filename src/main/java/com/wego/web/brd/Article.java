@@ -1,5 +1,6 @@
 package com.wego.web.brd;
 
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Component
 @AllArgsConstructor
 @NoArgsConstructor
+@Lazy
 public class Article {
 	private String artseq, image, uid, comments, msg, rating, boardType, title, content;
 }
