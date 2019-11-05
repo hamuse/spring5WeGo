@@ -14,6 +14,7 @@
 <script src="<%=application.getContextPath()%>/resources/js/brd/brd.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/cmm/proxy.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/vue/page_vue.js"></script>
+<script src="<%=application.getContextPath()%>/resources/js/vue/compo_vue.js"></script>
 <script>
 app.run('<%=application.getContextPath()%>');
 </script>

@@ -3,7 +3,7 @@ var brd = brd || {};
 brd =(()=>{
 	const WHEN_ERR='호출하는 js는 찾을수 없습니다.'
 	let context,js;
-	let brd_vuejs, uname, $uid, navijs, navi_vuejs , page_vuejs;
+	let brd_vuejs, uname, $uid, navijs, navi_vuejs , page_vuejs,compo_vuejs;
 	let init = ()=> {
 		context= $.ctx()
 		js = $.js()
@@ -11,6 +11,8 @@ brd =(()=>{
 		navijs = js+'/cmm/navi.js'
 		navi_vuejs= js+'/vue/navi_vue.js'
 		page_vuejs = js+'/vue/page_vue.js'
+		compo_vuejs=js+'/vue/compo_vue.js'
+		
 	
 	}
 	let onCreate = ()=>{
@@ -18,7 +20,8 @@ brd =(()=>{
 		$.when(
 				$.getScript(brd_vuejs),
 				$.getScript(navi_vuejs),
-				$.getScript(page_vuejs)
+				$.getScript(page_vuejs),
+				$.getScript(compo_vuejs)
 		).done(()=>{
 			setContentView()
 			 navi.onCreate()
@@ -34,7 +37,7 @@ brd =(()=>{
 		$(navi_vue.navi()).appendTo('#naviId')
 		 $('#recent_updates .media').remove()
 		 $('#recent_updates .d-block').remove()
-		 recent_updates(1)
+		 recent_updates({page: '1' , size: '5'})
 		
 		
 		
@@ -46,7 +49,7 @@ brd =(()=>{
 		 $('#recent_updates .media').remove()
 		 $('#writeid').remove()
 		 $('#recent_updates .d-block').remove()
-		 $.getJSON( context+'/articles/page/'+x, d =>{
+		 $.getJSON( context+'/articles/page/'+x.page+'/size/'+x.size, d =>{
 			 alert('recent_updates의 d 갯수'+Object.keys(d).length)
 			 alert("성공!!")
 					$.each(d.articles, (i,j)=>{
@@ -106,6 +109,27 @@ brd =(()=>{
 					 $('<li class="page-item"><a class="page-link" href="#">'+j+'</a></li>')
 					 .appendTo('#pagination')
 				 })
+				 $(compo_vue.pageSize())
+				 .appendTo('#pageSize')
+				 $('#listSizeSelectDiv ui[class="select_list"').empty()
+			/*	 $.each([5,10,50],(i,j)=>{
+					 $('<li><a href="#">'+j+'</a></li>')
+					 .appendTo('#listSizeSelectDiv')
+				 })*/
+				 $('<form id="paging_form" action="">'+
+			               '  <select name="site" size="1" >'+    //    multiple
+			               '  </select>'+
+			               '</form>')
+			           .appendTo('#recent_updates')
+			           $.each(['5개보기', '10개보기', '15개보기'], (i, j)=>{
+			               $('<option value="'+ j +'">'+ j +'</option>')
+			               .appendTo('#paging_form select')
+			           })
+//			           $.each(d.pages,(i,j)=>{
+//			        	   $('<li class="page-item"><a class="page-link" href="#">'+j+'개보기'+'</a></li>')
+//			        	   .appendTo('#pagination')
+//			           })
+//			           $('#pagination').css({})
 		 })
 	}
 	let write=()=>{
