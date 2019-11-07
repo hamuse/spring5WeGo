@@ -52,6 +52,7 @@ brd =(()=>{
 		 $('#recent_updates .container').remove()
 		 $('#paging_form').remove()
 		 $.getJSON( context+'/articles/page/'+x.page+'/size/'+x.size, d =>{
+			 let pxy = d.pxy
 			 alert('recent_updates의 d 갯수'+Object.keys(d).length)
 			 alert("성공!!")
 					$.each(d.articles, (i,j)=>{
@@ -74,74 +75,42 @@ brd =(()=>{
 				 $(page_vue.page())
 				 .appendTo('#recent_updates')
 				 $('#pagination').empty()
-		/*		 $.each(d,(i,j)=>{
-				     if(i % 5 == 0){
-					 $('<li class="page-item"><a class="page-link" href="#">'+(i / 5+1) +'</a></li>')
-					 .appendTo('#pagination')}
-				 })*/
-//				 밑에 선생님이 가르쳐준 방식1
-				/* let t = ''
-					 t += '<li class="page-item"><a class="page-link" href="#">1</a></li>'
-					 t += '<li class="page-item"><a class="page-link" href="#">2</a></li>'
-					 t += '<li class="page-item"><a class="page-link" href="#">3</a></li>'
-				$(t)
-				.appendTo('#pagination')*/
-//				 2.
-		/*		 let t = ''*/
-		/*		let i = 0*/
-			/*	for(;i<3;i++){
-					 t += '<li class="page-item"><a class="page-link" href="#">'+(i+1)+'</a></li>'
-				}
-				$(t)*/
-			/*	.appendTo('#pagination')*/
-//				 3.
-			/*	$.each([1,2,3,4],(i,j)=>{
-					$('<li class="page-item"><a class="page-link" href="#">'+j+'</a></li>')
-					.appendTo('#pagination')
-				})*/
-//				 4.
-	/*			 let t =''
-				let i = 0
-				for(;i<d.length/5;i++){
-					t += '<li class="page-item"><a class="page-link" href="#">'+(i+1)+'</a></li>'
-				}
-			 $(t)
-				.appendTo('#pagination')*/
-				 if(d.pxy.existPrev){
+				 
+				 if(pxy.existPrev){
 					   $('<li class="page-item"><a class="page-link" href="#">이전</a></li>')
 						 .appendTo('#pagination')
-						 	 .click(()=>{
-							 recent_updates({page: d.pxy.startPage-1 ,size: '5'})
+						 	 .click(e=>{
+						 		  e.preventDefault()        
+							 recent_updates({page: pxy.prevBlock ,size: pxy.pageSize})
 						 })
 				 }
-				
-					 //.prependTo('#pagination') -> 앞에 붙게 해준다. 뒤에다가 해놓아도 . 
-				 $.each(d.pxy.pages,(i,j)=>{
-					 $('<li class="page-item"><a class="page-link" href="#">'+j+'</a></li>')
-					 .appendTo('#pagination')
-					/* .click(function(){
-						 let that = $(this).attr('name')
-						 alert(that)
-					 })*/
-					 .click(()=>{
-						 recent_updates({page: j , size: '5'})
-					 })
-				 })
-				 if(d.pxy.existNext){
+						 let i = 0;
+						    for(i = pxy.startPage; i <= pxy.endPage ; i++) {
+						    	if(pxy.pageNum == i){
+						    		$('<li class="page-item"><a class="page-link" href="#">'+i+'</a></li>')
+									 .appendTo('#pagination')
+									 .addClass('active')
+						    	}else{
+						    	$('<li class="page-item"><a class="page-link" href="#">'+i+'</a></li>')
+								 .appendTo('#pagination')
+								 .click(function(){
+									 alert('페이지 번호 >>>' + $(this).children('.page-link').text())
+									 recent_updates({page: $(this).children('.page-link').text() , size: pxy.pageSize})
+								 })
+						    	}		 
+						    }
+				 
+				 if(pxy.existNext){
 					  $('<li class="page-item"><a class="page-link" href="#">다음</a></li>')
 						 .appendTo('#pagination')
-						 .click(()=>{
-							 recent_updates({page: d.pxy.endPage+1 ,size: '5'})
+						 .click(e=>{
+							  e.preventDefault()        
+							 recent_updates({page: pxy.nextBlock ,size:pxy.pageSize })
 						 })
 				 }
-					
 				 $(compo_vue.pageSize())
 				 .appendTo('#pageSize')
 				 $('#listSizeSelectDiv ui[class="select_list"').empty()
-			/*	 $.each([5,10,50],(i,j)=>{
-					 $('<li><a href="#">'+j+'</a></li>')
-					 .appendTo('#listSizeSelectDiv')
-				 })*/
 				 $('<form id="paging_form" action="">'+
 			               '  <select name="site" size="1" >'+    //    multiple
 			               '  </select>'+
@@ -151,17 +120,12 @@ brd =(()=>{
 			               $('<option value="'+ j.val +'">'+ j.sub +'개 보기</option>')
 			               .appendTo('#paging_form select')
 			           })
-			           $('#paging_form option[value="'+d.pxy.pageSize+'"]').attr('selected','true')
+				 
+			           $('#paging_form option[value="'+pxy.pageSize+'"]').attr('selected','true')
 			           $('#paging_form').change(()=>{
 			        	   alert('선택한 보기:'+$('#paging_form option:selected').text())
 			        	   recent_updates({page: '1' , size: $('#paging_form option:selected').val()})
 			           })
-//			           $.each(d.pages,(i,j)=>{
-//			        	   $('<li class="page-item"><a class="page-link" href="#">'+j+'개보기'+'</a></li>')
-//			        	   .appendTo('#pagination')
-//			           })
-//			           $('#pagination').css({})
-			           
 		 })
 	}
 	let write=()=>{
@@ -290,16 +254,12 @@ brd =(()=>{
 				alert('article_delete ajax삭제성공')
 				$('#recent_updates div.container-fluid').remove()
 				recent_updates()
-				
 			},
 			error: e =>{
 				alert('article_delete ajax 삭제 실패')
 			}
-			
 		})
-	
 	}
-	
 	
 	return{onCreate,write};
 })();
