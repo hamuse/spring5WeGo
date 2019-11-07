@@ -45,10 +45,12 @@ brd =(()=>{
 // ' <a class="nav-link" href="#">글쓰기 <span
 // class="sr-only">(current)</span></a>'+
 	let recent_updates= x =>{
-		alert('호출된 페이지 번호:'+x)
+		alert('호출된 페이지 번호:'+x.page)
 		 $('#recent_updates .media').remove()
 		 $('#writeid').remove()
 		 $('#recent_updates .d-block').remove()
+		 $('#recent_updates .container').remove()
+		 $('#paging_form').remove()
 		 $.getJSON( context+'/articles/page/'+x.page+'/size/'+x.size, d =>{
 			 alert('recent_updates의 d 갯수'+Object.keys(d).length)
 			 alert("성공!!")
@@ -105,10 +107,34 @@ brd =(()=>{
 				}
 			 $(t)
 				.appendTo('#pagination')*/
-				 $.each(d.pages,(i,j)=>{
+				 if(d.pxy.existPrev){
+					   $('<li class="page-item"><a class="page-link" href="#">이전</a></li>')
+						 .appendTo('#pagination')
+						 	 .click(()=>{
+							 recent_updates({page: d.pxy.startPage-1 ,size: '5'})
+						 })
+				 }
+				
+					 //.prependTo('#pagination') -> 앞에 붙게 해준다. 뒤에다가 해놓아도 . 
+				 $.each(d.pxy.pages,(i,j)=>{
 					 $('<li class="page-item"><a class="page-link" href="#">'+j+'</a></li>')
 					 .appendTo('#pagination')
+					/* .click(function(){
+						 let that = $(this).attr('name')
+						 alert(that)
+					 })*/
+					 .click(()=>{
+						 recent_updates({page: j , size: '5'})
+					 })
 				 })
+				 if(d.pxy.existNext){
+					  $('<li class="page-item"><a class="page-link" href="#">다음</a></li>')
+						 .appendTo('#pagination')
+						 .click(()=>{
+							 recent_updates({page: d.pxy.endPage+1 ,size: '5'})
+						 })
+				 }
+					
 				 $(compo_vue.pageSize())
 				 .appendTo('#pageSize')
 				 $('#listSizeSelectDiv ui[class="select_list"').empty()
@@ -121,15 +147,21 @@ brd =(()=>{
 			               '  </select>'+
 			               '</form>')
 			           .appendTo('#recent_updates')
-			           $.each(['5개보기', '10개보기', '15개보기'], (i, j)=>{
-			               $('<option value="'+ j +'">'+ j +'</option>')
+			           $.each([{sub:'5',val:'5'}, {sub:'10',val:'10'}, {sub:'15',val:'15'}], (i, j)=>{
+			               $('<option value="'+ j.val +'">'+ j.sub +'개 보기</option>')
 			               .appendTo('#paging_form select')
+			           })
+			           $('#paging_form option[value="'+d.pxy.pageSize+'"]').attr('selected','true')
+			           $('#paging_form').change(()=>{
+			        	   alert('선택한 보기:'+$('#paging_form option:selected').text())
+			        	   recent_updates({page: '1' , size: $('#paging_form option:selected').val()})
 			           })
 //			           $.each(d.pages,(i,j)=>{
 //			        	   $('<li class="page-item"><a class="page-link" href="#">'+j+'개보기'+'</a></li>')
 //			        	   .appendTo('#pagination')
 //			           })
 //			           $('#pagination').css({})
+			           
 		 })
 	}
 	let write=()=>{
@@ -178,7 +210,7 @@ brd =(()=>{
 				success : d =>{
 					$('#recent_updates div.container-fluid').remove()
 					alert('brd write _ :'+context)
-					recent_updates()
+					recent_updates({page: '1' , size: '5'})
 				},
 				error: e =>{
 					alert('brd write ajax실패')

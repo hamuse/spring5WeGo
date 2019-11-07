@@ -75,7 +75,10 @@ public class ArticleCtrl {
 		list.clear();
 		ISupplier<List<Article>> p = () -> articleMapper.selectpagination(pxy);
 		printer.accept("해당 페이지 글 목록\n" + p.get());
-		map.accept(Arrays.asList("articles","pages"), Arrays.asList(p.get(),Arrays.asList(1,2,3,4,5)));
+		int ran =pxy.random(10,100);
+		printer.accept("랜던수 100~1000:" + ran);
+		/*map.accept(Arrays.asList("articles","pages","pxy"), Arrays.asList(p.get(),Arrays.asList(1,2,3,4,5),pxy));*/
+		map.accept(Arrays.asList("articles","pxy"), Arrays.asList(p.get(),pxy));
 		return map.get();
 	}
 

@@ -8,7 +8,7 @@ import org.jsoup.nodes.Document;
 
 public class Crawler {
     public static void main(String[] args) {
-    	String url = "https://www.google.co.kr";
+    	String url = "http://www.pensionnara.co.kr/inc_blog/nblog.php?mini_no=13227";
     	try {
 			Connection.Response response = Jsoup.connect(url)
 																				.method(Connection.Method.GET)
@@ -21,5 +21,7 @@ public class Crawler {
 			
 			e.printStackTrace();
 		}
+    	
+    	
     }
 }
